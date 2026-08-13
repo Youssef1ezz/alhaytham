@@ -5,19 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الهيثم | مختبر الفيزياء</title>
 
-    <!-- أيقونة التبويب في المتصفح (Favicon) -->
     <link rel="icon" type="image/png" href="logo.png?v=2">
     <link rel="apple-touch-icon" href="logo.png?v=2">
 
-    <!-- SEO & Search Engines -->
-    <meta name="description" content="منصة ومختبر الهيثم للفيزياء وبحوث الضوء والكهرومغناطيسية | Al-Haytham Physics Lab">
-    <meta name="keywords" content="الهيثم, Al-Haytham, physics, optics, electromagnetism, فيزياء, كهرومغناطيسية, قوة لورنتز, محاكاة تفاعلية, يوسف عز الدين">
+    <meta name="description" content="منصة ومختبر الهيثم للفيزياء - محاكاة تفاعلية دقيقة لقوة لورنتز">
     <meta name="author" content="يوسف عز الدين">
 
-    <!-- خطوط عربية كلاسيكية -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- مكتبات المحاكاة 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
@@ -30,13 +25,10 @@
             --text-main: #e2dfd8;
             --text-sub: #8a8780;
             --border-color: rgba(184, 151, 98, 0.2);
+            --blue-accent: #4a90e2;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             background-color: var(--bg-dark);
@@ -46,7 +38,6 @@
             line-height: 1.6;
         }
 
-        /* الهيدر واللوجو */
         header {
             display: flex;
             justify-content: space-between;
@@ -59,642 +50,411 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
+        .logo-container { display: flex; align-items: center; gap: 15px; text-decoration: none; }
 
         .logo-img-wrapper {
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid var(--bronze-accent);
-            overflow: hidden;
-            background-color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(184, 151, 98, 0.2);
+            width: 60px; height: 60px; border-radius: 50%;
+            border: 2px solid var(--bronze-accent); overflow: hidden;
+            background-color: #ffffff; display: flex; align-items: center; justify-content: center;
         }
 
-        .logo-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-        }
+        .logo-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        .logo-title {
-            font-family: 'Amiri', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: var(--bronze-accent);
-        }
+        .logo-title { font-family: 'Amiri', serif; font-size: 2.2rem; font-weight: 700; color: var(--bronze-accent); }
 
-        nav a {
-            color: var(--text-sub);
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-family: 'Amiri', serif;
-            transition: 0.3s;
-        }
+        nav a { color: var(--text-sub); text-decoration: none; font-size: 1.1rem; font-family: 'Amiri', serif; }
+        nav a:hover { color: var(--bronze-accent); }
 
-        nav a:hover {
-            color: var(--bronze-accent);
-        }
+        .hero { text-align: center; padding: 2.5rem 1.5rem 1rem 1.5rem; max-width: 900px; margin: 0 auto; }
+        .hero h1 { font-family: 'Amiri', serif; font-size: 3.2rem; color: var(--bronze-accent); margin-bottom: 2rem; }
 
-        /* الواجهة الرئيسية */
-        .hero {
-            text-align: center;
-            padding: 2.5rem 1.5rem 1rem 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-family: 'Amiri', serif;
-            font-size: 3.2rem;
-            color: var(--bronze-accent);
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        /* صندوق المقولة */
         .quote-box {
-            background: var(--card-bg);
-            border-right: 3px solid var(--bronze-accent);
-            padding: 1.8rem 2rem;
-            border-radius: 6px;
-            margin: 0 auto 2.5rem auto;
-            max-width: 850px;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-            border-left: 1px solid var(--border-color);
-            text-align: right;
+            background: var(--card-bg); border-right: 3px solid var(--bronze-accent);
+            padding: 1.8rem 2rem; border-radius: 6px; margin: 0 auto 2.5rem auto;
+            max-width: 850px; border: 1px solid var(--border-color); text-align: right;
         }
 
-        .quote-text {
-            font-family: 'Amiri', serif;
-            font-size: 1.05rem;
-            color: var(--text-main);
-            line-height: 2;
-            opacity: 0.95;
-        }
+        .quote-text { font-family: 'Amiri', serif; font-size: 1.05rem; line-height: 2; opacity: 0.95; }
+        .quote-text p { margin-bottom: 1.2rem; }
+        .author-footnote { font-family: 'Amiri', serif; font-size: 0.95rem; color: var(--bronze-accent); margin-top: 1.5rem; display: block; text-align: left; border-top: 1px dashed var(--border-color); padding-top: 0.8rem; }
 
-        .quote-text p {
-            margin-bottom: 1.2rem;
-        }
-
-        .quote-text p:last-child {
-            margin-bottom: 0;
-        }
-
-        .author-footnote {
-            font-family: 'Amiri', serif;
-            font-size: 0.95rem;
-            color: var(--bronze-accent);
-            margin-top: 1.5rem;
-            display: block;
-            text-align: left;
-            direction: rtl;
-            font-weight: bold;
-            border-top: 1px dashed var(--border-color);
-            padding-top: 0.8rem;
-        }
-
-        /* قسم أزرار التبويب للمحاكاة */
-        .sim-section-header {
-            width: 90%;
-            max-width: 1050px;
-            margin: 0 auto 10px auto;
-            display: flex;
-            gap: 10px;
-            justify-content: flex-start;
-        }
-
-        .sim-tab-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-sub);
-            padding: 8px 18px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: 'Amiri', serif;
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        .sim-tab-btn.active, .sim-tab-btn:hover {
-            background: var(--bronze-dim);
-            color: var(--bronze-accent);
-            border-color: var(--bronze-accent);
-        }
-
-        /* إطار المحاكاة */
+        /* إطار الخلفية البصرية للمجال */
         .sim-container {
-            position: relative;
-            width: 90%;
-            max-width: 1050px;
-            height: 500px;
-            margin: 0 auto 3.5rem auto;
-            border-radius: 6px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
+            position: relative; width: 90%; max-width: 1050px; height: 420px;
+            margin: 0 auto 3.5rem auto; border-radius: 6px; overflow: hidden; border: 1px solid var(--border-color);
         }
 
-        .canvas-sim {
-            width: 100%;
-            height: 100%;
-            display: none;
-        }
+        #canvas-container { width: 100%; height: 100%; }
 
-        .canvas-sim.active {
-            display: block;
-        }
+        .grid-section { width: 90%; max-width: 1050px; margin: 0 auto 4rem auto; }
+        .section-title { font-family: 'Amiri', serif; font-size: 1.9rem; color: var(--bronze-accent); margin-bottom: 1.5rem; border-right: 3px solid var(--bronze-accent); padding-right: 10px; }
 
-        .sim-overlay {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(17, 17, 20, 0.85);
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            color: var(--bronze-accent);
-            border: 1px solid var(--border-color);
-            pointer-events: none;
-            font-family: 'Amiri', serif;
-            z-index: 10;
-        }
-
-        /* أدوات التحكم لقوة لورنتز */
-        .controls-panel {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            left: 12px;
-            background: rgba(24, 24, 29, 0.9);
-            padding: 10px 15px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-            justify-content: space-around;
-            z-index: 10;
-            font-size: 0.85rem;
-        }
-
-        .control-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .control-group label {
-            color: var(--bronze-accent);
-            font-family: 'Amiri', serif;
-        }
-
-        .control-group input[type="range"] {
-            accent-color: var(--bronze-accent);
-            cursor: pointer;
-        }
-
-        .control-group select {
-            background: var(--bg-dark);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-family: 'Cairo', sans-serif;
-        }
-
-        /* كروت الأقسام */
-        .grid-section {
-            width: 90%;
-            max-width: 1050px;
-            margin: 0 auto 4rem auto;
-        }
-
-        .section-title {
-            font-family: 'Amiri', serif;
-            font-size: 1.9rem;
-            color: var(--bronze-accent);
-            margin-bottom: 1.5rem;
-            border-right: 3px solid var(--bronze-accent);
-            padding-right: 10px;
-        }
-
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
 
         .card {
-            background-color: var(--card-bg);
-            border-radius: 6px;
-            padding: 1.5rem;
-            border: 1px solid var(--border-color);
+            background-color: var(--card-bg); border-radius: 6px; padding: 1.8rem;
+            border: 1px solid var(--border-color); transition: 0.3s; cursor: pointer;
         }
 
-        .card h3 {
-            font-family: 'Amiri', serif;
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
+        .card:hover { border-color: var(--bronze-accent); transform: translateY(-3px); }
+
+        .card h3 { font-family: 'Amiri', serif; font-size: 1.5rem; color: var(--bronze-accent); margin-bottom: 0.5rem; }
+        .card p { color: var(--text-sub); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem; }
+
+        .btn-open {
+            display: inline-block; font-family: 'Amiri', serif; font-size: 1rem;
+            color: var(--bg-dark); background-color: var(--bronze-accent);
+            padding: 6px 16px; border-radius: 4px; font-weight: bold; text-decoration: none;
         }
 
-        .card p {
-            color: var(--text-sub);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
+        /* نافذة المحاكاة التفاعلية (Modal Window) */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(10, 10, 12, 0.95);
+            overflow-y: auto; padding: 20px;
         }
 
-        .badge-soon {
-            display: inline-block;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.75rem;
-            color: var(--bronze-accent);
-            background-color: var(--bronze-dim);
-            padding: 2px 8px;
-            border-radius: 3px;
-            border: 1px solid var(--border-color);
+        .modal-content {
+            background: var(--card-bg); margin: 20px auto; max-width: 1200px;
+            border: 1px solid var(--border-color); border-radius: 8px; padding: 20px;
+            position: relative;
         }
 
-        footer {
-            text-align: center;
-            padding: 1.8rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-sub);
-            font-family: 'Amiri', serif;
-            font-size: 0.95rem;
+        .close-btn {
+            position: absolute; left: 20px; top: 15px; font-size: 2rem;
+            color: var(--text-sub); cursor: pointer; transition: 0.3s;
+        }
+        .close-btn:hover { color: var(--bronze-accent); }
+
+        .lab-layout {
+            display: grid; grid-template-columns: 280px 1fr 250px; gap: 15px; margin-top: 15px;
         }
 
-        footer a {
-            color: var(--bronze-accent);
-            text-decoration: none;
-            margin-right: 6px;
+        @media (max-width: 900px) {
+            .lab-layout { grid-template-columns: 1fr; }
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .panel {
+            background: var(--bg-dark); border: 1px solid var(--border-color);
+            border-radius: 6px; padding: 15px; font-size: 0.85rem;
         }
+
+        .panel h4 { font-family: 'Amiri', serif; color: var(--bronze-accent); font-size: 1.2rem; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+
+        .control-item { margin-bottom: 12px; }
+        .control-item label { display: block; color: var(--text-main); margin-bottom: 4px; }
+        .control-item input, .control-item select {
+            width: 100%; background: var(--card-bg); border: 1px solid var(--border-color);
+            color: var(--text-main); padding: 5px 8px; border-radius: 4px;
+        }
+
+        #lorentz-canvas { width: 100%; height: 500px; border-radius: 6px; border: 1px solid var(--border-color); }
+
+        .data-value { font-family: monospace; color: var(--bronze-accent); float: left; }
+
+        footer { text-align: center; padding: 1.8rem; border-top: 1px solid var(--border-color); color: var(--text-sub); font-family: 'Amiri', serif; }
+        footer a { color: var(--bronze-accent); text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر واللوجو -->
     <header>
         <a href="#" class="logo-container">
-            <div class="logo-img-wrapper">
-                <img src="logo.png?v=2" alt="الهيثم">
-            </div>
+            <div class="logo-img-wrapper"><img src="logo.png?v=2" alt="الهيثم"></div>
             <div class="logo-title">الهيثم</div>
         </a>
-        <nav>
-            <a href="#sections">الأقسام</a>
-        </nav>
+        <nav><a href="#sections">الأقسام</a></nav>
     </header>
 
-    <!-- الواجهة الرئيسية -->
     <section class="hero">
         <h1>مختبر الهيثم</h1>
-        
-        <!-- المقولة -->
         <div class="quote-box">
             <div class="quote-text">
                 <p>"الحق مطلوب لذاته، وكل مطلوب لذاته فليس يعني طالبه غير وجوده، ووجود الحق صعب، والطريق إليه وعر، والحقائق منغمسة في الشبهات.</p>
-                
-                <p>وحسن الظن بالعلماء في طباع جميع الناس؛ فالناظر في كتب العلماء إذا استرسل مع طبعه وجعل غرضه فهم ما ذكروه وغاية ما أوردوه، حصلت الحقائق عنده هي المعاني التي قصدوا لها والغايات التي أشاروا إليها. وما عصم الله العلماء من الزلل، ولا حمى علمهم من التقصير والخلل، ولو كان ذلك كذلك لما اختلف العلماء في شيء من العلوم، ولا تفرقت آراؤهم في شيء من حقائق الأمور.</p>
-                
-                <p>فطالب الحق ليس هو الناظر في كتب المتقدمين المسترسل مع طبعه في حسن الظن بهم، بل طالب الحق هو المتهم لظنه فيهم، المتوقف فيما يفهمه عنهم، المتبع للحجة والبرهان لا قول القائل الذي هو إنسان المخصوص في جبلته بضروب الخلل والنقصان.</p>
-                
-                <p>والواجب على الناظر في كتب العلوم إذا كان غرضه معرفة الحقائق، أن يجعل نفسه خصماً لكل ما ينظر فيه، ويجيل فكره في متنه وجميع حواشيه، ويخصمه من جميع جهاته ونواحيه، ويتهم أيضاً نفسه عند خصامه فلا يتحامل عليه ولا يتسمح فيه.. فإنه إذا سلك هذه الطريقة انكشفت له الحقائق، وظهر ما عساه وقع في كلام من تقدمه من التقصير والشبه."</p>
+                <p>فطالب الحق ليس هو الناظر في كتب المتقدمين المسترسل مع طبعه في حسن الظن بهم، بل طالب الحق هو المتهم لظنه فيهم، المتوقف فيما يفهمه عنهم، المتبع للحجة والبرهان..."</p>
             </div>
-            <span class="author-footnote">— أبو علي الحسن بن الحسن بن الهيثم (354 هـ - 430 هـ / 965 م - 1040 م)، الشكوك على بطليموس</span>
+            <span class="author-footnote">— الحسن بن الهيثم، الشكوك على بطليموس</span>
         </div>
     </section>
 
-    <!-- أزرار اختيار التجرية -->
-    <div class="sim-section-header">
-        <button class="sim-tab-btn active" onclick="switchSim('sim1')">1. المجال الكهرومغناطيسي</button>
-        <button class="sim-tab-btn" onclick="switchSim('sim2')">2. قوة لورنتز (حركة شحنة)</button>
+    <!-- الخلفية البصرية للمجال -->
+    <div class="sim-container">
+        <div id="canvas-container"></div>
     </div>
 
-    <!-- إطار المحاكاة -->
-    <div class="sim-container" id="sim">
-        <!-- المحاكاة الأولى: المجال -->
-        <div id="sim1-container" class="canvas-sim active">
-            <div class="sim-overlay">تجربة المجال الكهرومغناطيسي | تحكم بالماوس للدوران والتفاعل</div>
-        </div>
-
-        <!-- المحاكاة الثانية: قوة لورنتز -->
-        <div id="sim2-container" class="canvas-sim">
-            <div class="sim-overlay">تجربة قوة لورنتز: F = q(v × B) | مسار انحناء الشحنة</div>
-            <div class="controls-panel">
-                <div class="control-group">
-                    <label>نوع الجسيم:</label>
-                    <select id="particleType" onchange="resetParticle()">
-                        <option value="1">بروتون (+q)</option>
-                        <option value="-1">إلكترون (-q)</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <label>السرعة (v):</label>
-                    <input type="range" id="velSlider" min="1" max="10" value="5">
-                </div>
-                <div class="control-group">
-                    <label>شدة المجال (B):</label>
-                    <input type="range" id="magSlider" min="1" max="10" value="5">
-                </div>
-                <button class="sim-tab-btn" style="padding: 4px 10px; font-size:0.85rem;" onclick="resetParticle()">إعادة إطلاق</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- الأقسام -->
+    <!-- كروت الأقسام -->
     <section class="grid-section" id="sections">
-        <h2 class="section-title">أقسام المنصة</h2>
+        <h2 class="section-title">أقسام المختبر</h2>
         <div class="cards-grid">
-            <div class="card">
-                <h3>تجارب المحاكاة</h3>
-                <p>محاكاة تفاعلية للظواهر الفيزيائية والكهرومغناطيسية.</p>
-                <span class="badge-soon">متاحة الآن</span>
+            <div class="card" onclick="openLorentzLab()">
+                <h3>محاكاة قوة لورنتز (Lorentz Force)</h3>
+                <p>تفاعلية عالية الدقة لحركة الشحنات الكهربائية تحت تأثير المجالين الكهربائي والمغناطيسي $\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})$.</p>
+                <span class="btn-open">دخول المختبر التفاعلي ←</span>
             </div>
             <div class="card">
                 <h3>المقالات والأبحاث</h3>
-                <p>مقالات وأبحاث في الفيزياء النظرية والبصريات.</p>
-                <span class="badge-soon">ستتوفر قريباً</span>
+                <p>أبحاث ومقالات في الفيزياء النظرية والبصريات.</p>
+                <span style="font-size:0.8rem; color:var(--bronze-accent);">ستتوفر قريباً</span>
             </div>
         </div>
     </section>
 
-    <!-- الفوتر مع الجيميل والحقوق -->
+    <!-- نافذة تجربة لورنتز المستقلة والمفصلة -->
+    <div id="lorentzModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeLorentzLab()">&times;</span>
+            <h2 style="font-family:'Amiri', serif; color:var(--bronze-accent);">مختبر قوة لورنتز التفاعلي | Lorentz Force Lab</h2>
+            
+            <div class="lab-layout">
+                <!-- لوحة التحكم الإدخالية -->
+                <div class="panel">
+                    <h4>عوامل التجربة</h4>
+                    
+                    <div class="control-item">
+                        <label>الجسيم المشحون:</label>
+                        <select id="pPreset" onchange="applyPreset()">
+                            <option value="proton">بروتون (+1e)</option>
+                            <option value="electron">إلكترون (-1e)</option>
+                            <option value="alpha">جسيم ألفا (+2e)</option>
+                        </select>
+                    </div>
+
+                    <div class="control-item">
+                        <label>المجال المغناطيسي $B_z$ (Tesla):</label>
+                        <input type="range" id="bMag" min="-10" max="10" value="4" step="0.5" oninput="updatePhysics()">
+                    </div>
+
+                    <div class="control-item">
+                        <label>المجال الكهربائي $E_y$ (N/C):</label>
+                        <input type="range" id="eField" min="-10" max="10" value="0" step="0.5" oninput="updatePhysics()">
+                    </div>
+
+                    <div class="control-item">
+                        <label>السرعة الابتدائية $v_0$ (m/s):</label>
+                        <input type="range" id="vInit" min="1" max="15" value="8" step="0.5" oninput="resetLorentz()">
+                    </div>
+
+                    <div class="control-item">
+                        <label>زاوية الإطلاق $\theta$ (درجة):</label>
+                        <input type="range" id="vAngle" min="0" max="90" value="0" step="5" oninput="resetLorentz()">
+                    </div>
+
+                    <button class="btn-open" style="width:100%; margin-top:10px; cursor:pointer;" onclick="resetLorentz()">إعادة إطلاق الجسيم</button>
+                </div>
+
+                <!-- شاشة العرض 3D -->
+                <div id="lorentz-canvas"></div>
+
+                <!-- لوحة التحليل الرياضي والنتائج -->
+                <div class="panel">
+                    <h4>التحليل والنتائج اللحظية</h4>
+                    <p>المعادلة: <br><span style="color:var(--bronze-accent); font-family:serif;">$\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})$</span></p>
+                    <hr style="border-color:var(--border-color); margin:10px 0;">
+                    
+                    <div style="margin-bottom:8px;">الشحنة $q$: <span id="valQ" class="data-value">+1.6e-19 C</span></div>
+                    <div style="margin-bottom:8px;">الكتلة $m$: <span id="valM" class="data-value">1.67e-27 kg</span></div>
+                    <div style="margin-bottom:8px;">القوة اللحظية $|\vec{F}|$: <span id="valF" class="data-value">0.00 N</span></div>
+                    <div style="margin-bottom:8px;">نصف قطر المسار $r$: <span id="valR" class="data-value">0.00 m</span></div>
+                    <div style="margin-bottom:8px;">تردد السيكلوترون $f$: <span id="valFreq" class="data-value">0.00 Hz</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <p>منصة الهيثم التعليمية | جميع الحقوق محفوظة لـ يوسف عز الدين 
-            • <a href="mailto:yousseftamer0192@gmail.com">تواصل: yousseftamer0192@gmail.com</a>
-        </p>
+        <p>منصة الهيثم التعليمية | جميع الحقوق محفوظة لـ يوسف عز الدين • <a href="mailto:yousseftamer0192@gmail.com">تواصل</a></p>
     </footer>
 
     <script>
-        /* === التنقل بين التجربتين === */
-        function switchSim(simId) {
-            document.querySelectorAll('.sim-tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.canvas-sim').forEach(c => c.classList.remove('active'));
-
-            if (simId === 'sim1') {
-                event.target.classList.add('active');
-                document.getElementById('sim1-container').classList.add('active');
-            } else {
-                event.target.classList.add('active');
-                document.getElementById('sim2-container').classList.add('active');
-                if(!sim2Initialized) initSim2();
-            }
-        }
-
-        /* ==============================================
-           المحاكاة الأولى: المجال الكهرومغناطيسي 3D
-        ============================================== */
-        const container1 = document.getElementById('sim1-container');
+        /* === 1. خلفية الواجهة الرئيسية (المجال 3D) === */
+        const container1 = document.getElementById('canvas-container');
         const scene1 = new THREE.Scene();
         scene1.background = new THREE.Color(0x111114);
-
         const camera1 = new THREE.PerspectiveCamera(55, container1.clientWidth / container1.clientHeight, 0.1, 1000);
         camera1.position.set(0, 7, 11);
-
         const renderer1 = new THREE.WebGLRenderer({ antialias: true });
         renderer1.setSize(container1.clientWidth, container1.clientHeight);
-        renderer1.setPixelRatio(window.devicePixelRatio);
         container1.appendChild(renderer1.domElement);
-
         const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
-        controls1.enableDamping = true;
-        controls1.dampingFactor = 0.05;
 
-        const count = 65;
-        const numParticles = count * count;
+        const count = 60, numParticles = count * count;
         const geometry1 = new THREE.BufferGeometry();
         const positions1 = new Float32Array(numParticles * 3);
         const colors1 = new Float32Array(numParticles * 3);
-
         let idx = 0;
         for (let i = 0; i < count; i++) {
             for (let j = 0; j < count; j++) {
-                positions1[idx * 3] = (i - count / 2) * 0.24;
+                positions1[idx * 3] = (i - count / 2) * 0.25;
                 positions1[idx * 3 + 1] = 0;
-                positions1[idx * 3 + 2] = (j - count / 2) * 0.24;
+                positions1[idx * 3 + 2] = (j - count / 2) * 0.25;
                 idx++;
             }
         }
-
         geometry1.setAttribute('position', new THREE.BufferAttribute(positions1, 3));
         geometry1.setAttribute('color', new THREE.BufferAttribute(colors1, 3));
-
-        const material1 = new THREE.PointsMaterial({
-            size: 0.11,
-            vertexColors: true,
-            transparent: true,
-            opacity: 0.85,
-        });
-
-        const particles1 = new THREE.Points(geometry1, material1);
+        const particles1 = new THREE.Points(geometry1, new THREE.PointsMaterial({ size: 0.1, vertexColors: true }));
         scene1.add(particles1);
 
-        const sphere1Mat = new THREE.MeshBasicMaterial({ color: 0xb89762 });
-        const centerSphere = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 32), sphere1Mat);
-        scene1.add(centerSphere);
-
-        const sphere2Mat = new THREE.MeshBasicMaterial({ color: 0x7a8a9e });
-        const mouseSphere = new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), sphere2Mat);
-        scene1.add(mouseSphere);
-
-        const raycaster1 = new THREE.Raycaster();
-        const mouse1 = new THREE.Vector2(-100, -100);
-        const plane1 = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
-        const mouseWorld1 = new THREE.Vector3(100, 0, 100);
-
-        container1.addEventListener('mousemove', (e) => {
-            const rect = renderer1.domElement.getBoundingClientRect();
-            mouse1.x = ((e.clientX - rect.left) / container1.clientWidth) * 2 - 1;
-            mouse1.y = -((e.clientY - rect.top) / container1.clientHeight) * 2 + 1;
-            
-            raycaster1.setFromCamera(mouse1, camera1);
-            raycaster1.ray.intersectPlane(plane1, mouseWorld1);
-            mouseSphere.position.copy(mouseWorld1);
-        });
-
-        let clock1 = new THREE.Clock();
-
+        let clock = new THREE.Clock();
         function animate1() {
             requestAnimationFrame(animate1);
-            
-            const time = clock1.getElapsedTime() * 2.5;
-            const posAttr = particles1.geometry.attributes.position;
-            const colAttr = particles1.geometry.attributes.color;
-
+            const time = clock.getElapsedTime() * 2;
+            const pos = particles1.geometry.attributes.position;
+            const col = particles1.geometry.attributes.color;
             for (let i = 0; i < numParticles; i++) {
-                const x = posAttr.getX(i);
-                const z = posAttr.getZ(i);
-
-                const r1 = Math.sqrt(x * x + z * z) + 0.1;
-                const r2 = Math.sqrt((x - mouseWorld1.x) ** 2 + (z - mouseWorld1.z) ** 2) + 0.1;
-
-                const wave = Math.sin(r1 * 2.0 - time) * 0.28 + Math.sin(r2 * 2.2 - time) * 0.2 * Math.exp(-r2 * 0.2);
-                posAttr.setY(i, wave);
-
-                colAttr.setX(i, 0.72); 
-                colAttr.setY(i, 0.59 + wave * 0.2); 
-                colAttr.setZ(i, 0.38 + (1.0 / (r2 + 0.8)) * 0.3);
+                const x = pos.getX(i), z = pos.getZ(i);
+                const r = Math.sqrt(x*x + z*z) + 0.1;
+                const wave = Math.sin(r * 2.0 - time) * 0.25;
+                pos.setY(i, wave);
+                col.setX(i, 0.72); col.setY(i, 0.59 + wave * 0.2); col.setZ(i, 0.38);
             }
-
-            posAttr.needsUpdate = true;
-            colAttr.needsUpdate = true;
-
+            pos.needsUpdate = true; col.needsUpdate = true;
             controls1.update();
             renderer1.render(scene1, camera1);
         }
         animate1();
 
+        /* === 2. تجربة لورنتز التفاعلية المتقدمة === */
+        let lScene, lCamera, lRenderer, lControls;
+        let pMesh, trailLine, trailPositions;
+        let pos, vel, charge = 1, mass = 1;
+        const maxTrail = 500;
+        let trailIdx = 0, isLInit = false;
 
-        /* ==============================================
-           المحاكاة الثانية: قوة لورنتز Lorentz Force
-        ============================================== */
-        let sim2Initialized = false;
-        let scene2, camera2, renderer2, controls2;
-        let pMesh, pTrail, trailPositions, pPos, pVel;
-        const maxTrail = 300;
-        let trailCount = 0;
+        function openLorentzLab() {
+            document.getElementById('lorentzModal').style.display = 'block';
+            if(!isLInit) initLorentzLab();
+        }
 
-        function initSim2() {
-            sim2Initialized = true;
-            const container2 = document.getElementById('sim2-container');
+        function closeLorentzLab() {
+            document.getElementById('lorentzModal').style.display = 'none';
+        }
 
-            scene2 = new THREE.Scene();
-            scene2.background = new THREE.Color(0x111114);
+        function initLorentzLab() {
+            isLInit = true;
+            const lContainer = document.getElementById('lorentz-canvas');
 
-            camera2 = new THREE.PerspectiveCamera(55, container2.clientWidth / container2.clientHeight, 0.1, 1000);
-            camera2.position.set(0, 10, 15);
+            lScene = new THREE.Scene();
+            lScene.background = new THREE.Color(0x0e0e11);
 
-            renderer2 = new THREE.WebGLRenderer({ antialias: true });
-            renderer2.setSize(container2.clientWidth, container2.clientHeight);
-            renderer2.setPixelRatio(window.devicePixelRatio);
-            container2.appendChild(renderer2.domElement);
+            lCamera = new THREE.PerspectiveCamera(50, lContainer.clientWidth / lContainer.clientHeight, 0.1, 1000);
+            lCamera.position.set(0, 12, 20);
 
-            controls2 = new THREE.OrbitControls(camera2, renderer2.domElement);
-            controls2.enableDamping = true;
+            lRenderer = new THREE.WebGLRenderer({ antialias: true });
+            lRenderer.setSize(lContainer.clientWidth, lContainer.clientHeight);
+            lContainer.appendChild(lRenderer.domElement);
 
-            // شبكة إرشادية للمجال
-            const grid = new THREE.GridHelper(20, 20, 0xb89762, 0x333338);
-            scene2.add(grid);
+            lControls = new THREE.OrbitControls(lCamera, lRenderer.domElement);
 
-            // تمثيل خطوط المجال المغناطيسي B (أسهم للأعلى)
-            for(let x = -8; x <= 8; x += 4) {
-                for(let z = -8; z <= 8; z += 4) {
-                    const arrow = new THREE.ArrowHelper(
-                        new THREE.Vector3(0, 1, 0),
-                        new THREE.Vector3(x, -2, z),
-                        4, 0x3b5998, 0.4, 0.3
-                    );
-                    scene2.add(arrow);
-                }
-            }
+            // شبكة الفضاء
+            const grid = new THREE.GridHelper(30, 30, 0xb89762, 0x222228);
+            lScene.add(grid);
 
-            // الجسيم المشحون
-            const pGeo = new THREE.SphereGeometry(0.35, 32, 32);
-            const pMat = new THREE.MeshBasicMaterial({ color: 0xb89762 });
-            pMesh = new THREE.Mesh(pGeo, pMat);
-            scene2.add(pMesh);
+            // الجسيم
+            const pGeo = new THREE.SphereGeometry(0.4, 32, 32);
+            pMesh = new THREE.Mesh(pGeo, new THREE.MeshBasicMaterial({ color: 0xb89762 }));
+            lScene.add(pMesh);
 
             // مسار الجسيم (Trail)
             const tGeo = new THREE.BufferGeometry();
             trailPositions = new Float32Array(maxTrail * 3);
             tGeo.setAttribute('position', new THREE.BufferAttribute(trailPositions, 3));
-            const tMat = new THREE.LineBasicMaterial({ color: 0xb89762, opacity: 0.8, transparent: true });
-            pTrail = new THREE.Line(tGeo, tMat);
-            scene2.add(pTrail);
+            trailLine = new THREE.Line(tGeo, new THREE.LineBasicMaterial({ color: 0xb89762, opacity: 0.8, transparent: true }));
+            lScene.add(trailLine);
 
-            resetParticle();
-            animate2();
+            applyPreset();
+            animateLorentz();
         }
 
-        function resetParticle() {
-            if(!sim2Initialized) return;
-            const q = parseFloat(document.getElementById('particleType').value);
-            pMesh.material.color.setHex(q > 0 ? 0xb89762 : 0x4a90e2); // ذهبي للموجب وإزرق للسالب
-
-            pPos = new THREE.Vector3(-6, 0, 0);
-            const vVal = parseFloat(document.getElementById('velSlider').value) * 0.03;
-            pVel = new THREE.Vector3(vVal, 0, 0);
-
-            pMesh.position.copy(pPos);
-
-            trailCount = 0;
-            for(let i=0; i < maxTrail * 3; i++) trailPositions[i] = 0;
-            pTrail.geometry.attributes.position.needsUpdate = true;
+        function applyPreset() {
+            const type = document.getElementById('pPreset').value;
+            if(type === 'proton') { charge = 1; mass = 1; pMesh.material.color.setHex(0xb89762); }
+            else if(type === 'electron') { charge = -1; mass = 0.05; pMesh.material.color.setHex(0x4a90e2); }
+            else if(type === 'alpha') { charge = 2; mass = 4; pMesh.material.color.setHex(0xe25c4a); }
+            
+            document.getElementById('valQ').innerText = (charge > 0 ? '+' : '') + charge + 'e';
+            document.getElementById('valM').innerText = mass + ' u';
+            resetLorentz();
         }
 
-        function animate2() {
-            requestAnimationFrame(animate2);
+        function resetLorentz() {
+            if(!isLInit) return;
+            pos = new THREE.Vector3(-8, 0, 0);
+            const v0 = parseFloat(document.getElementById('vInit').value) * 0.04;
+            const deg = parseFloat(document.getElementById('vAngle').value) * (Math.PI / 180);
+            
+            vel = new THREE.Vector3(v0 * Math.cos(deg), v0 * Math.sin(deg), 0);
+            pMesh.position.copy(pos);
 
-            if (pPos) {
-                const q = parseFloat(document.getElementById('particleType').value);
-                const bVal = parseFloat(document.getElementById('magSlider').value) * 0.15;
-                const B = new THREE.Vector3(0, bVal, 0); // مجال مغناطيسي لعلى
+            trailIdx = 0;
+            for(let i=0; i<maxTrail*3; i++) trailPositions[i] = 0;
+            trailLine.geometry.attributes.position.needsUpdate = true;
+            updatePhysics();
+        }
 
-                // F = q * (v x B)
-                const F = new THREE.Vector3().crossVectors(pVel, B).multiplyScalar(q);
-                
-                pVel.add(F.multiplyScalar(0.016)); // dt
-                pPos.add(pVel);
-                pMesh.position.copy(pPos);
+        function updatePhysics() {
+            if(!isLInit) return;
+            const B_z = parseFloat(document.getElementById('bMag').value) * 0.1;
+            const vVal = vel ? vel.length() : 1;
+            
+            // حساب القوة الرياضية والنظريات
+            if (Math.abs(B_z) > 0.01) {
+                const r = (mass * vVal) / (Math.abs(charge) * Math.abs(B_z));
+                const freq = (Math.abs(charge) * Math.abs(B_z)) / (2 * Math.PI * mass);
+                document.getElementById('valR').innerText = r.toFixed(2) + ' m';
+                document.getElementById('valFreq').innerText = freq.toFixed(2) + ' Hz';
+            } else {
+                document.getElementById('valR').innerText = '∞ (خط مستقيم)';
+                document.getElementById('valFreq').innerText = '0.00 Hz';
+            }
+        }
 
-                // إضافة نقطة للمسار
-                if (trailCount < maxTrail) {
-                    trailPositions[trailCount * 3] = pPos.x;
-                    trailPositions[trailCount * 3 + 1] = pPos.y;
-                    trailPositions[trailCount * 3 + 2] = pPos.z;
-                    trailCount++;
+        function animateLorentz() {
+            requestAnimationFrame(animateLorentz);
+
+            if(pos && vel) {
+                const B_z = parseFloat(document.getElementById('bMag').value) * 0.1;
+                const E_y = parseFloat(document.getElementById('eField').value) * 0.002;
+
+                const B = new THREE.Vector3(0, 0, B_z);
+                const E = new THREE.Vector3(0, E_y, 0);
+
+                // معادلة لورنتز: F = q * (E + v x B)
+                const vCrossB = new THREE.Vector3().crossVectors(vel, B);
+                const F = E.add(vCrossB).multiplyScalar(charge);
+
+                // تحديث السرعة والموقع
+                const acc = F.divideScalar(mass);
+                vel.add(acc.multiplyScalar(0.016));
+                pos.add(vel);
+                pMesh.position.copy(pos);
+
+                document.getElementById('valF').innerText = F.length().toFixed(3) + ' N';
+
+                // رسم المسار
+                if(trailIdx < maxTrail) {
+                    trailPositions[trailIdx * 3] = pos.x;
+                    trailPositions[trailIdx * 3 + 1] = pos.y;
+                    trailPositions[trailIdx * 3 + 2] = pos.z;
+                    trailIdx++;
                 } else {
-                    for(let i = 0; i < maxTrail - 1; i++) {
-                        trailPositions[i * 3] = trailPositions[(i + 1) * 3];
-                        trailPositions[i * 3 + 1] = trailPositions[(i + 1) * 3 + 1];
-                        trailPositions[i * 3 + 2] = trailPositions[(i + 1) * 3 + 2];
+                    for(let i=0; i<maxTrail-1; i++) {
+                        trailPositions[i*3] = trailPositions[(i+1)*3];
+                        trailPositions[i*3+1] = trailPositions[(i+1)*3+1];
+                        trailPositions[i*3+2] = trailPositions[(i+1)*3+2];
                     }
-                    trailPositions[(maxTrail - 1) * 3] = pPos.x;
-                    trailPositions[(maxTrail - 1) * 3 + 1] = pPos.y;
-                    trailPositions[(maxTrail - 1) * 3 + 2] = pPos.z;
+                    trailPositions[(maxTrail-1)*3] = pos.x;
+                    trailPositions[(maxTrail-1)*3+1] = pos.y;
+                    trailPositions[(maxTrail-1)*3+2] = pos.z;
                 }
-                pTrail.geometry.attributes.position.needsUpdate = true;
+                trailLine.geometry.attributes.position.needsUpdate = true;
 
-                // إعادة إطلاق الجسيم لو خرج بعيداً
-                if(pPos.length() > 15) {
-                    resetParticle();
-                }
+                if(pos.length() > 20) resetLorentz();
             }
 
-            controls2.update();
-            renderer2.render(scene2, camera2);
+            lControls.update();
+            lRenderer.render(lScene, lCamera);
         }
-
-        window.addEventListener('resize', () => {
-            camera1.aspect = container1.clientWidth / container1.clientHeight;
-            camera1.updateProjectionMatrix();
-            renderer1.setSize(container1.clientWidth, container1.clientHeight);
-
-            if(sim2Initialized) {
-                const container2 = document.getElementById('sim2-container');
-                camera2.aspect = container2.clientWidth / container2.clientHeight;
-                camera2.updateProjectionMatrix();
-                renderer2.setSize(container2.clientWidth, container2.clientHeight);
-            }
-        });
     </script>
 </body>
 </html>
