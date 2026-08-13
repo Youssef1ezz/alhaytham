@@ -1,42 +1,71 @@
-/* === 1. المحاكاة البصرية للمجال في الواجهة الرئيسية === */
+/* === 1. تجربة المجال الكهرومغناطيسي الرئيسية (الواجهة) === */
 const container1 = document.getElementById('canvas-container');
 const scene1 = new THREE.Scene();
 scene1.background = new THREE.Color(0x111114);
+
 const camera1 = new THREE.PerspectiveCamera(55, container1.clientWidth / container1.clientHeight, 0.1, 1000);
 camera1.position.set(0, 7, 11);
+
 const renderer1 = new THREE.WebGLRenderer({ antialias: true });
 renderer1.setSize(container1.clientWidth, container1.clientHeight);
 container1.appendChild(renderer1.domElement);
-const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
 
-const count = 60, numParticles = count * count;
+const controls1 = new THREE.OrbitControls(camera1, renderer1.domElement);
+controls1.enableDamping = true;
+
+const count = 65, numParticles = count * count;
 const geometry1 = new THREE.BufferGeometry();
 const positions1 = new Float32Array(numParticles * 3);
 const colors1 = new Float32Array(numParticles * 3);
+
 let idx = 0;
 for (let i = 0; i < count; i++) {
     for (let j = 0; j < count; j++) {
-        positions1[idx * 3] = (i - count / 2) * 0.25;
+        positions1[idx * 3] = (i - count / 2) * 0.24;
         positions1[idx * 3 + 1] = 0;
-        positions1[idx * 3 + 2] = (j - count / 2) * 0.25;
+        positions1[idx * 3 + 2] = (j - count / 2) * 0.24;
         idx++;
     }
 }
 geometry1.setAttribute('position', new THREE.BufferAttribute(positions1, 3));
 geometry1.setAttribute('color', new THREE.BufferAttribute(colors1, 3));
-const particles1 = new THREE.Points(geometry1, new THREE.PointsMaterial({ size: 0.1, vertexColors: true }));
+
+const particles1 = new THREE.Points(geometry1, new THREE.PointsMaterial({ size: 0.11, vertexColors: true, transparent: true, opacity: 0.85 }));
 scene1.add(particles1);
+
+const centerSphere = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 32), new THREE.MeshBasicMaterial({ color: 0xb89762 }));
+scene1.add(centerSphere);
+
+const mouseSphere = new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), new THREE.MeshBasicMaterial({ color: 0x7a8a9e }));
+scene1.add(mouseSphere);
+
+const raycaster1 = new THREE.Raycaster();
+const mouse1 = new THREE.Vector2(-100, -100);
+const plane1 = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0);
+const mouseWorld1 = new THREE.Vector3(100, 0, 100);
+
+container1.addEventListener('mousemove', (e) => {
+    const rect = renderer1.domElement.getBoundingClientRect();
+    mouse1.x = ((e.clientX - rect.left) / container1.clientWidth) * 2 - 1;
+    mouse1.y = -((e.clientY - rect.top) / container1.clientHeight) * 2 + 1;
+    raycaster1.setFromCamera(mouse1, camera1);
+    raycaster1.ray.intersectPlane(plane1, mouseWorld1);
+    mouseSphere.position.copy(mouseWorld1);
+});
 
 let clock = new THREE.Clock();
 function animate1() {
     requestAnimationFrame(animate1);
-    const time = clock.getElapsedTime() * 2;
+    const time = clock.getElapsedTime() * 2.5;
     const pos = particles1.geometry.attributes.position;
     const col = particles1.geometry.attributes.color;
+
     for (let i = 0; i < numParticles; i++) {
         const x = pos.getX(i), z = pos.getZ(i);
-        const r = Math.sqrt(x*x + z*z) + 0.1;
-        const wave = Math.sin(r * 2.0 - time) * 0.25;
+        const r1 = Math.sqrt(x * x + z * z) + 0.1;
+        const r2 = Math.sqrt((x - mouseWorld1.x) ** 2 + (z - mouseWorld1.z) ** 2) + 0.1;
+        const wave = Math.sin(r1 * 2.0 - time) * 0.28 + Math.sin(r2 * 2.2 - time) * 0.2 * Math.exp(-r2 * 0.2);
+        
         pos.setY(i, wave);
         col.setX(i, 0.72); col.setY(i, 0.59 + wave * 0.2); col.setZ(i, 0.38);
     }
@@ -46,8 +75,7 @@ function animate1() {
 }
 animate1();
 
-
-/* === 2. تجربة لورنتز (Lorentz Force) === */
+/* === 2. تجربة قوة لورنتز (Lorentz Force) === */
 let lScene, lCamera, lRenderer, lControls;
 let pMesh, trailLine, trailPositions;
 let pos, vel, charge = 1, mass = 1;
@@ -147,12 +175,10 @@ function animateLorentz() {
     lRenderer.render(lScene, lCamera);
 }
 
-
-/* === 3. تجربة الذرة الكوانتية وتكميم الطاقة (Bohr Quantum Atom) === */
+/* === 3. تجربة الذرة الكوانتية وتكميم الطاقة === */
 let qScene, qCamera, qRenderer, qControls;
-let nucleusMesh, electronMesh, currentOrbitLine;
-let currentN = 1, electronAngle = 0;
-let isQInit = false, photonMesh = null;
+let electronMesh;
+let currentN = 1, electronAngle = 0, isQInit = false;
 
 function openQuantumLab() {
     document.getElementById('quantumModal').style.display = 'block';
@@ -175,21 +201,16 @@ function initQuantumLab() {
     qContainer.appendChild(qRenderer.domElement);
     qControls = new THREE.OrbitControls(qCamera, qRenderer.domElement);
 
-    // النواة
-    nucleusMesh = new THREE.Mesh(new THREE.SphereGeometry(0.8, 32, 32), new THREE.MeshBasicMaterial({ color: 0xe25c4a }));
+    const nucleusMesh = new THREE.Mesh(new THREE.SphereGeometry(0.8, 32, 32), new THREE.MeshBasicMaterial({ color: 0xe25c4a }));
     qScene.add(nucleusMesh);
 
-    // رسم مستويات الطاقة الخمس المكممة (n = 1..5)
     for(let n=1; n<=5; n++) {
         const radius = n * n * 1.2;
-        const ringGeo = new THREE.RingGeometry(radius - 0.03, radius + 0.03, 64);
-        const ringMat = new THREE.MeshBasicMaterial({ color: 0x33333d, side: THREE.DoubleSide });
-        const ring = new THREE.Mesh(ringGeo, ringMat);
+        const ring = new THREE.Mesh(new THREE.RingGeometry(radius - 0.03, radius + 0.03, 64), new THREE.MeshBasicMaterial({ color: 0x33333d, side: THREE.DoubleSide }));
         ring.rotation.x = Math.PI / 2;
         qScene.add(ring);
     }
 
-    // الإلكترون
     electronMesh = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 32), new THREE.MeshBasicMaterial({ color: 0x4a90e2 }));
     qScene.add(electronMesh);
 
@@ -202,15 +223,14 @@ function changeOrbit() {
     const oldN = currentN;
     currentN = parseInt(document.getElementById('targetLevel').value);
 
-    // حساب طول موجة الانبعاث/الامتصاص Delta E = h*c / lambda
     const E_old = -13.6 / (oldN * oldN);
     const E_new = -13.6 / (currentN * currentN);
     const dE = Math.abs(E_new - E_old);
 
     if (dE > 0) {
-        const lambda = (1240 / dE).toFixed(1); // nm
+        const lambda = (1240 / dE).toFixed(1);
         document.getElementById('valWave').innerText = lambda + ' nm';
-        document.getElementById('valSeries').innerText = currentN === 1 ? 'سلسلة ليمان (UV)' : (currentN === 2 ? 'سلسلة بالمر (مرئي)' : 'سلسلة باشن (IR)');
+        document.getElementById('valSeries').innerText = currentN === 1 ? 'ليمان (UV)' : (currentN === 2 ? 'بالمر (مرئي)' : 'باشن (IR)');
     } else {
         document.getElementById('valWave').innerText = '-- nm';
         document.getElementById('valSeries').innerText = 'استقرار';
@@ -220,22 +240,18 @@ function changeOrbit() {
 }
 
 function updateQuantumData() {
-    const En = (-13.6 / (currentN * currentN)).toFixed(2);
-    const rn = (0.53 * currentN * currentN).toFixed(2);
-    document.getElementById('valEnergy').innerText = En + ' eV';
-    document.getElementById('valRadius').innerText = rn + ' Å';
+    document.getElementById('valEnergy').innerText = (-13.6 / (currentN * currentN)).toFixed(2) + ' eV';
+    document.getElementById('valRadius').innerText = (0.53 * currentN * currentN).toFixed(2) + ' Å';
 }
 
 function animateQuantum() {
     requestAnimationFrame(animateQuantum);
-
     if(electronMesh) {
         const r = currentN * currentN * 1.2;
-        electronAngle += 0.02 / currentN; // السرعة تقل في المستويات الخارجي
+        electronAngle += 0.02 / currentN;
         electronMesh.position.x = r * Math.cos(electronAngle);
         electronMesh.position.z = r * Math.sin(electronAngle);
     }
-
     qControls.update();
     qRenderer.render(qScene, qCamera);
 }
