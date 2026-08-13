@@ -1,22 +1,18 @@
-<!-- الكلمات المفتاحية والوصف لجوجل (SEO) -->
-<meta name="description" content="منصة الهيثم للفيزياء وبحوث الضوء | Al-Haytham Platform for Physics and Optics">
-<meta name="keywords" content="الهيثم, Al-Haytham, physics, optics, فيزياء, بصريات, محاكاة تفاعلية, يوسف عز الدين">
-<meta name="author" content="يوسف عز الدين">
-
-<!-- أرشفة اللغات بفرعين عربي وإنجليزي -->
-<meta property="og:title" content="الهيثم | Al-Haytham Physics Platform">
-<meta property="og:description" content="منصة تعليمية تفاعلية للفيزياء وبحوث الضوء">
-<meta property="og:url" content="https://Youssef1ezz.github.io/alhaytham/">
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الهيثم</title>
+    <title>الهيثم | مختبر الفيزياء</title>
 
     <!-- أيقونة التبويب في المتصفح (Favicon) -->
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="icon" type="image/png" href="logo.png?v=2">
+    <link rel="apple-touch-icon" href="logo.png?v=2">
+
+    <!-- SEO & Search Engines -->
+    <meta name="description" content="منصة ومختبر الهيثم للفيزياء وبحوث الضوء | Al-Haytham Physics Lab">
+    <meta name="keywords" content="الهيثم, Al-Haytham, physics, optics, فيزياء, بصريات, محاكاة تفاعلية, يوسف عز الدين">
+    <meta name="author" content="يوسف عز الدين">
 
     <!-- خطوط عربية كلاسيكية -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
@@ -66,22 +62,22 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
         }
 
-        /* تعديل إطار اللوجو ليمتلئ بالكامل وبشكل متناسق */
+        /* تكبير اللوجو وتوضيحه */
         .logo-img-wrapper {
-            width: 50px;
-            height: 50px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
-            border: 1.5px solid var(--bronze-accent);
+            border: 2px solid var(--bronze-accent);
             overflow: hidden;
             background-color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 8px rgba(184, 151, 98, 0.15);
+            box-shadow: 0 0 10px rgba(184, 151, 98, 0.2);
         }
 
         .logo-img-wrapper img {
@@ -94,7 +90,7 @@
 
         .logo-title {
             font-family: 'Amiri', serif;
-            font-size: 1.9rem;
+            font-size: 2.2rem;
             font-weight: 700;
             color: var(--bronze-accent);
         }
@@ -102,8 +98,7 @@
         nav a {
             color: var(--text-sub);
             text-decoration: none;
-            margin-right: 1.8rem;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-family: 'Amiri', serif;
             transition: 0.3s;
         }
@@ -122,42 +117,53 @@
 
         .hero h1 {
             font-family: 'Amiri', serif;
-            font-size: 3rem;
+            font-size: 3.2rem;
             color: var(--bronze-accent);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             font-weight: 700;
         }
 
-        /* صندوق المقولة */
+        /* صندوق المقولة بتنسيق مريح ومقسّم لأسطر */
         .quote-box {
             background: var(--card-bg);
-            border-right: 2px solid var(--bronze-accent);
-            padding: 1.2rem 1.5rem;
-            border-radius: 4px;
-            margin: 0 auto 2rem auto;
+            border-right: 3px solid var(--bronze-accent);
+            padding: 1.8rem 2rem;
+            border-radius: 6px;
+            margin: 0 auto 2.5rem auto;
             max-width: 850px;
             border-top: 1px solid var(--border-color);
             border-bottom: 1px solid var(--border-color);
             border-left: 1px solid var(--border-color);
-            text-align: justify;
+            text-align: right;
         }
 
         .quote-text {
             font-family: 'Amiri', serif;
-            font-size: 0.92rem;
+            font-size: 1.05rem;
             color: var(--text-main);
-            line-height: 1.8;
-            opacity: 0.9;
+            line-height: 2;
+            opacity: 0.95;
+        }
+
+        .quote-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        .quote-text p:last-child {
+            margin-bottom: 0;
         }
 
         .author-footnote {
             font-family: 'Amiri', serif;
-            font-size: 0.88rem;
+            font-size: 0.95rem;
             color: var(--bronze-accent);
-            margin-top: 0.8rem;
+            margin-top: 1.5rem;
             display: block;
             text-align: left;
             direction: rtl;
+            font-weight: bold;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 0.8rem;
         }
 
         /* إطار المحاكاة */
@@ -184,7 +190,7 @@
             background: rgba(17, 17, 20, 0.85);
             padding: 5px 12px;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--bronze-accent);
             border: 1px solid var(--border-color);
             pointer-events: none;
@@ -200,7 +206,7 @@
 
         .section-title {
             font-family: 'Amiri', serif;
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             color: var(--bronze-accent);
             margin-bottom: 1.5rem;
             border-right: 3px solid var(--bronze-accent);
@@ -271,25 +277,30 @@
     <header>
         <a href="#" class="logo-container">
             <div class="logo-img-wrapper">
-                <img src="logo.png" alt=" مختبر الهيثم">
+                <img src="logo.png?v=2" alt="الهيثم">
             </div>
-            <div class="logo-title"> الهيثم </div>
+            <div class="logo-title">الهيثم</div>
         </a>
         <nav>
-            <a href="#sim">تجربة المجال</a>
             <a href="#sections">الأقسام</a>
         </nav>
     </header>
 
     <!-- الواجهة الرئيسية -->
     <section class="hero">
-        <h1>الهيثم</h1>
+        <h1>مختبر الهيثم</h1>
         
-        <!-- المقولة الكاملة مع التوثيق -->
+        <!-- المقولة بتنسيق أسطر وفقرات منفصلة وسهلة القراءة -->
         <div class="quote-box">
-            <p class="quote-text">
-                "الحق مطلوب لذاته، وكل مطلوب لذاته فليس يعني طالبه غير وجوده، ووجود الحق صعب، والطريق إليه وعر، والحقائق منغمسة في الشبهات، وحسن الظن بالعلماء في طباع جميع الناس، فالناظر في كتب العلماء إذا استرسل مع طبعه، وجعل غرضه فهم ما ذكروه، وغاية ما أوردوه، حصلت الحقائق عنده هي المعاني التي قصدوا لها، والغايات التي أشاروا إليها. وما عصم الله العلماء من الززل، ولا حمى علمهم من التقصير والخلل. ولو كان ذلك كذلك لما اختلف العلماء في شيء من العلوم، ولا تفرقت آراؤهم في شيء من حقائق الأمور، والوجود بخلاف ذلك. فطالب الحق ليس هو الناظر في كتب المتقدمين، المسترسل مع طبعه في حسن الظن بهم، بل طالب الحق هو المتهم لظنه فيهم، المتوقف فيما يفهمه عنهم، المتبع الحجة و البرهان، لا قول القائل الذي هو إنسان، المخصوص في جبلته بضروب الخلل و النقصان. والواجب على الناظر في كتب العلوم، إذا كان غرضه معرفة الحقائق، أن يجعل نفسه خصما لكل ماينظر فيه، ويجيل فكره في متنه وجميع حواشيه، ويخصمه من جميع جهاته ونواحيه، ويتهم أيضاً نفسه عند خصامه فلا يتحامل عليه ولايتسمح فيه. فإنـه إذا سلك هذه الطريقة إنكشفت له الحقائق، وظهر ماعساه وقع في كلام من تقدمه من التقصير والشُّبه."
-            </p>
+            <div class="quote-text">
+                <p>"الحق مطلوب لذاته، وكل مطلوب لذاته فليس يعني طالبه غير وجوده، ووجود الحق صعب، والطريق إليه وعر، والحقائق منغمسة في الشبهات.</p>
+                
+                <p>وحسن الظن بالعلماء في طباع جميع الناس؛ فالناظر في كتب العلماء إذا استرسل مع طبعه وجعل غرضه فهم ما ذكروه وغاية ما أوردوه، حصلت الحقائق عنده هي المعاني التي قصدوا لها والغايات التي أشاروا إليها. وما عصم الله العلماء من الزلل، ولا حمى علمهم من التقصير والخلل، ولو كان ذلك كذلك لما اختلف العلماء في شيء من العلوم، ولا تفرقت آراؤهم في شيء من حقائق الأمور.</p>
+                
+                <p>فطالب الحق ليس هو الناظر في كتب المتقدمين المسترسل مع طبعه في حسن الظن بهم، بل طالب الحق هو المتهم لظنه فيهم، المتوقف فيما يفهمه عنهم، المتبع للحجة والبرهان لا قول القائل الذي هو إنسان المخصوص في جبلته بضروب الخلل والنقصان.</p>
+                
+                <p>والواجب على الناظر في كتب العلوم إذا كان غرضه معرفة الحقائق، أن يجعل نفسه خصماً لكل ما ينظر فيه، ويجيل فكره في متنه وجميع حواشيه، ويخصمه من جميع جهاته ونواحيه، ويتهم أيضاً نفسه عند خصامه فلا يتحامل عليه ولا يتسمح فيه.. فإنه إذا سلك هذه الطريقة انكشفت له الحقائق، وظهر ما عساه وقع في كلام من تقدمه من التقصير والشبه."</p>
+            </div>
             <span class="author-footnote">— أبو علي الحسن بن الحسن بن الهيثم (354 هـ - 430 هـ / 965 م - 1040 م)، الشكوك على بطليموس</span>
         </div>
     </section>
