@@ -3,33 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maxwell | منصة الفيزياء التفاعلية</title>
-    <!-- خط تجريدي حديث -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>الهيثم | منصة الفيزياء وبحوث الضوء</title>
+    <!-- خطوط عربية كلاسيكية هادئة -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <!-- مكتبات المحاكاة 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <style>
         :root {
-            --bg-color: #0a0a0c;
-            --card-bg: #121216;
-            --accent-cyan: #00d2ff;
-            --accent-pink: #ff0055;
-            --text-color: #e0e0e0;
+            --bg-dark: #111114;
+            --card-bg: #18181d;
+            --bronze-accent: #b89762;
+            --bronze-dim: rgba(184, 151, 98, 0.15);
+            --text-main: #e2dfd8;
+            --text-sub: #8a8780;
+            --border-color: rgba(184, 151, 98, 0.2);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Cairo', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Cairo', serif;
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
         /* الهيدر واللوجو */
@@ -38,89 +42,109 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.2rem 8%;
-            background-color: rgba(18, 18, 22, 0.8);
-            backdrop-filter: blur(10px);
+            background: rgba(17, 17, 20, 0.95);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             text-decoration: none;
         }
 
-        /* اللوجو البصري (Maxwell SVG Logo) */
-        .logo-icon {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--accent-pink), var(--accent-cyan));
-            border-radius: 10px;
+        .logo-img-wrapper {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid var(--bronze-accent);
+            overflow: hidden;
+            background-color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
         }
 
-        .logo-text {
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: #fff;
-            letter-spacing: 1px;
-        }
-
-        .logo-text span {
-            color: var(--accent-cyan);
+        .logo-title {
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--bronze-accent);
+            letter-spacing: 0.5px;
         }
 
         nav a {
-            color: var(--text-color);
+            color: var(--text-sub);
             text-decoration: none;
-            margin-right: 1.8rem;
-            font-size: 1rem;
+            margin-right: 2rem;
+            font-size: 1.05rem;
+            font-family: 'Amiri', serif;
             transition: 0.3s;
         }
 
         nav a:hover {
-            color: var(--accent-cyan);
+            color: var(--bronze-accent);
         }
 
-        /* القسم الرئيسي Hero */
+        /* الواجهة الرئيسية */
         .hero {
             text-align: center;
-            padding: 4rem 1rem 2rem 1rem;
+            padding: 3rem 1.5rem 1.5rem 1.5rem;
+            max-width: 850px;
+            margin: 0 auto;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            background: linear-gradient(90deg, #fff, var(--accent-cyan));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Amiri', serif;
+            font-size: 2.6rem;
+            color: var(--text-main);
+            margin-bottom: 1.2rem;
+            font-weight: 700;
         }
 
-        .hero p {
-            font-size: 1.1rem;
-            color: #a0a0a0;
-            max-width: 600px;
-            margin: 0 auto 2rem auto;
+        /* المقولة والهامش */
+        .quote-box {
+            background: var(--card-bg);
+            border-right: 2px solid var(--bronze-accent);
+            padding: 1.2rem 1.8rem;
+            border-radius: 4px;
+            margin: 1rem auto 2rem auto;
+            max-width: 720px;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            border-left: 1px solid var(--border-color);
+            text-align: right;
         }
 
-        /* إطار المحاكاة الـ 3D */
+        .quote-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        .author-footnote {
+            font-family: 'Amiri', serif;
+            font-size: 0.95rem;
+            color: var(--bronze-accent);
+            margin-top: 0.6rem;
+            display: block;
+        }
+
+        /* إطار المحاكاة */
         .sim-container {
             position: relative;
             width: 90%;
-            max-width: 1100px;
-            height: 550px;
+            max-width: 1050px;
+            height: 480px;
             margin: 0 auto 4rem auto;
-            border-radius: 16px;
+            border-radius: 8px;
             overflow: hidden;
-            border: 1px solid rgba(0, 210, 255, 0.2);
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 210, 255, 0.1);
+            border: 1px solid var(--border-color);
         }
 
         #canvas-container {
@@ -132,66 +156,89 @@
             position: absolute;
             top: 15px;
             right: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            padding: 8px 16px;
-            border-radius: 20px;
+            background: rgba(17, 17, 20, 0.85);
+            padding: 6px 14px;
+            border-radius: 4px;
             font-size: 0.85rem;
-            color: var(--accent-cyan);
-            border: 1px solid rgba(0, 210, 255, 0.3);
+            color: var(--bronze-accent);
+            border: 1px solid var(--border-color);
             pointer-events: none;
+            font-family: 'Amiri', serif;
         }
 
-        /* كروت الدروس والمشاريع */
+        /* كروت الأقسام */
         .grid-section {
             width: 90%;
-            max-width: 1100px;
+            max-width: 1050px;
             margin: 0 auto 5rem auto;
         }
 
         .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            border-right: 4px solid var(--accent-cyan);
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            color: var(--bronze-accent);
+            margin-bottom: 1.8rem;
+            border-right: 3px solid var(--bronze-accent);
             padding-right: 12px;
         }
 
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
 
         .card {
             background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-cyan);
+            border-radius: 6px;
+            padding: 1.8rem;
+            border: 1px solid var(--border-color);
+            position: relative;
         }
 
         .card h3 {
-            color: #fff;
-            margin-bottom: 0.8rem;
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 0.6rem;
         }
 
         .card p {
-            color: #888;
+            color: var(--text-sub);
             font-size: 0.95rem;
             line-height: 1.6;
+            margin-bottom: 1.2rem;
+        }
+
+        .badge-soon {
+            display: inline-block;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.8rem;
+            color: var(--bronze-accent);
+            background-color: var(--bronze-dim);
+            padding: 3px 10px;
+            border-radius: 3px;
+            border: 1px solid var(--border-color);
         }
 
         footer {
             text-align: center;
             padding: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: #666;
-            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-sub);
+            font-family: 'Amiri', serif;
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: var(--bronze-accent);
+            text-decoration: none;
+            margin-right: 8px;
+            transition: 0.2s;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -200,61 +247,68 @@
     <!-- الهيدر واللوجو -->
     <header>
         <a href="#" class="logo-container">
-            <div class="logo-icon">
-                <!-- أيقونة المجال المكسويلي -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+            <div class="logo-img-wrapper">
+                <svg viewBox="0 0 200 200" width="100%" height="100%">
+                    <circle cx="100" cy="100" r="95" fill="none" stroke="#111114" stroke-width="4"/>
+                    <path d="M 40 90 C 40 40, 160 40, 160 90 C 160 130, 140 170, 100 175 C 60 170, 40 130, 40 90 Z" fill="none" stroke="#111114" stroke-width="3"/>
+                    <path d="M 50 75 Q 100 35 150 75" fill="none" stroke="#111114" stroke-width="4"/>
+                    <circle cx="75" cy="95" r="5" fill="#111114"/>
+                    <circle cx="125" cy="95" r="5" fill="#111114"/>
+                    <path d="M 60 120 Q 100 175 140 120" fill="none" stroke="#111114" stroke-width="3"/>
                 </svg>
             </div>
-            <div class="logo-text">MAXWELL<span>.</span></div>
+            <div class="logo-title">الهيثم</div>
         </a>
         <nav>
-            <a href="#sim">المحاكاة</a>
-            <a href="#lessons">المذكرات</a>
-            <a href="#about">عن المنصة</a>
+            <a href="#sim">تجربة المجال</a>
+            <a href="#sections">الأقسام</a>
         </nav>
     </header>
 
-    <!-- واجهة الموقع -->
+    <!-- الواجهة الرئيسية -->
     <section class="hero">
-        <h1>مختبر الفيزياء التفاعلي ثلاثي الأبعاد</h1>
-        <p>منصة تبسيط مفاهيم الكهرومغناطيسية والمجالات الموجية عبر محاكاة بصريّة سينمائية عالية الجودة.</p>
+        <h1>مختبر الهيثم للفيزياء وبحوث الضوء</h1>
+        
+        <div class="quote-box">
+            <p class="quote-text">«والواجبُ على مَن ينظرُ في كتبِ العلومِ أن يجعلَ نفسَهُ خصماً لكلّ ما يقرؤُه، ويُمْعِنَ النظرَ في حقيقتهِ من سائرِ نواحيهِ»</p>
+            <span class="author-footnote">— أبو علي الحسن بن الحسن بن الهيثم (354 هـ - 430 هـ)</span>
+        </div>
     </section>
 
-    <!-- شاشة المحاكاة الـ 3D -->
+    <!-- المحاكاة -->
     <div class="sim-container" id="sim">
-        <div class="sim-overlay">🖱️ تحكم بالماوس: اسحب للدوران 360° | حرك الماوس للتفاعل</div>
+        <div class="sim-overlay">تجربة المجال الكهرومغناطيسي | تحكم بالماوس للدوران والتفاعل</div>
         <div id="canvas-container"></div>
     </div>
 
-    <!-- قسم المذكرات والشروحات -->
-    <section class="grid-section" id="lessons">
-        <h2 class="section-title">المذكرات والمواضيع الدراسية</h2>
+    <!-- الأقسام -->
+    <section class="grid-section" id="sections">
+        <h2 class="section-title">أقسام المنصة</h2>
         <div class="cards-grid">
             <div class="card">
-                <h3>⚡ مجالات كولوم والتراكب الموجي</h3>
-                <p>شرح مبسط لطبيعة توزيع الشحنات والمجالات الكهربية والمغناطيسية المتداخلة في الأبعاد الثلاثية.</p>
+                <h3>تجارب المحاكاة</h3>
+                <p>محاكاة تفاعلية للظواهر الفيزيائية.</p>
+                <span class="badge-soon">ستتوفر قريباً</span>
             </div>
             <div class="card">
-                <h3>📐 التحليل الاتجاهي (Vector Analysis)</h3>
-                <p>تطبيقات عملية على قوانين الانحدار (Grad)، والتباعد (Div)، والالتفاف (Curl) مع الرسم التفاعلي.</p>
-            </div>
-            <div class="card">
-                <h3>🌊 معادلات مكسويل في الفراغ</h3>
-                <p>كيف تنتشر الموجات الكهرومغناطيسية وسرعة الضوء المستنتجة من القوانين الأساسية.</p>
+                <h3>المقالات والأبحاث</h3>
+                <p>مقالات وأبحاث في الفيزياء.</p>
+                <span class="badge-soon">ستتوفر قريباً</span>
             </div>
         </div>
     </section>
 
+    <!-- الفوتر مع الجيميل -->
     <footer>
-        <p>صُمم وتطوّر بواسطة يوسف | جميع الحقوق محفوظة  Maxwell Physics Platform</p>
+        <p>منصة الهيثم التعليمية | جميع الحقوق محفوظة لـ يوسف عز الدين 
+            • <a href="mailto:yousseftamer0192@gmail.com">تواصل: yousseftamer0192@gmail.com</a>
+        </p>
     </footer>
 
-    <!-- كود المحاكاة 3D الشغال داخل الشاشة -->
     <script>
         const container = document.getElementById('canvas-container');
         const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x0a0a0c);
+        scene.background = new THREE.Color(0x111114);
 
         const camera = new THREE.PerspectiveCamera(55, container.clientWidth / container.clientHeight, 0.1, 1000);
         camera.position.set(0, 7, 11);
@@ -268,8 +322,7 @@
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
 
-        // شبكة الجسيمات
-        const count = 75;
+        const count = 65;
         const numParticles = count * count;
         const geometry = new THREE.BufferGeometry();
         const positions = new Float32Array(numParticles * 3);
@@ -278,9 +331,9 @@
         let idx = 0;
         for (let i = 0; i < count; i++) {
             for (let j = 0; j < count; j++) {
-                positions[idx * 3] = (i - count / 2) * 0.22;
+                positions[idx * 3] = (i - count / 2) * 0.24;
                 positions[idx * 3 + 1] = 0;
-                positions[idx * 3 + 2] = (j - count / 2) * 0.22;
+                positions[idx * 3 + 2] = (j - count / 2) * 0.24;
                 idx++;
             }
         }
@@ -292,20 +345,18 @@
             size: 0.11,
             vertexColors: true,
             transparent: true,
-            opacity: 0.95,
-            blending: THREE.AdditiveBlending
+            opacity: 0.85,
         });
 
         const particles = new THREE.Points(geometry, material);
         scene.add(particles);
 
-        // الشحنات المشعة
-        const sphere1Mat = new THREE.MeshBasicMaterial({ color: 0xff0055 });
-        const centerSphere = new THREE.Mesh(new THREE.SphereGeometry(0.4, 32, 32), sphere1Mat);
+        const sphere1Mat = new THREE.MeshBasicMaterial({ color: 0xb89762 });
+        const centerSphere = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 32), sphere1Mat);
         scene.add(centerSphere);
 
-        const sphere2Mat = new THREE.MeshBasicMaterial({ color: 0x00d2ff });
-        const mouseSphere = new THREE.Mesh(new THREE.SphereGeometry(0.3, 32, 32), sphere2Mat);
+        const sphere2Mat = new THREE.MeshBasicMaterial({ color: 0x7a8a9e });
+        const mouseSphere = new THREE.Mesh(new THREE.SphereGeometry(0.22, 32, 32), sphere2Mat);
         scene.add(mouseSphere);
 
         const raycaster = new THREE.Raycaster();
@@ -328,7 +379,7 @@
         function animate() {
             requestAnimationFrame(animate);
             
-            const time = clock.getElapsedTime() * 3.5;
+            const time = clock.getElapsedTime() * 2.5;
             const posAttr = particles.geometry.attributes.position;
             const colAttr = particles.geometry.attributes.color;
 
@@ -339,21 +390,15 @@
                 const r1 = Math.sqrt(x * x + z * z) + 0.1;
                 const r2 = Math.sqrt((x - mouseWorld.x) ** 2 + (z - mouseWorld.z) ** 2) + 0.1;
 
-                const wave = Math.sin(r1 * 2.2 - time) * 0.35 + Math.sin(r2 * 2.8 - time) * 0.25 * Math.exp(-r2 * 0.2);
+                const wave = Math.sin(r1 * 2.0 - time) * 0.28 + Math.sin(r2 * 2.2 - time) * 0.2 * Math.exp(-r2 * 0.2);
                 posAttr.setY(i, wave);
 
-                const h = (wave + 0.5); 
-                const r = Math.min(1.0, Math.max(0.0, 0.1 + (1.0 / (r2 + 0.5)) * 0.5));
-                const g = Math.min(1.0, Math.max(0.2, h * 0.85));
-                const b = Math.min(1.0, Math.max(0.6, 0.9 + h * 0.2));
-
-                colAttr.setX(i, r);
-                colAttr.setY(i, g);
-                colAttr.setZ(i, b);
+                colAttr.setX(i, 0.72); 
+                colAttr.setY(i, 0.59 + wave * 0.2); 
+                colAttr.setZ(i, 0.38 + (1.0 / (r2 + 0.8)) * 0.3);
             }
 
             posAttr.needsUpdate = true;
-            
             colAttr.needsUpdate = true;
 
             controls.update();
